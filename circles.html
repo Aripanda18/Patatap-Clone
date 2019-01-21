@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Circles</title>
+	<script type="text/javascript" src="paper-full.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script>
+	<link rel="stylesheet" type="text/css" href="circles.css">
+
+	<script type="text/paperscript" canvas="myCanvas">
+
+	var keyData = {
+		a:{
+			color: "#9ACD32",
+			sound: new Howl({
+  				src: ['sounds/bubbles.mp3']
+			})	
+		},
+		b:{
+			color: "#FF69B4",
+			sound: new Howl({
+  				src: ['sounds/clay.mp3']
+			})	
+		},
+		c:{
+			color: "#FF00FF",
+			sound: new Howl({
+  				src: ['sounds/confetti.mp3']
+			})	
+		},
+		d:{
+			color: "#9f7a12",
+			sound: new Howl({
+  				src: ['sounds/corona.mp3']
+			})	
+		},
+		e:{
+			color: "#5f9b10",
+			sound: new Howl({
+  				src: ['sounds/dotted-spiral.mp3']
+			})	
+		},
+		f:{
+			color: "#737868",
+			sound: new Howl({
+  				src: ['sounds/flash-1.mp3']
+			})	
+		},
+		g:{
+			color: "#1d7799",
+			sound: new Howl({
+  				src: ['sounds/flash-2.mp3']
+			})	
+		},
+		h:{
+			color: "#519bb3",
+			sound: new Howl({
+  				src: ['sounds/flash-3.mp3']
+			})	
+		},
+		i:{
+			color: "#ab2461",
+			sound: new Howl({
+  				src: ['sounds/glimmer.mp3']
+			})	
+		},
+		j:{
+			color: "#a5a111",
+			sound: new Howl({
+  				src: ['sounds/moon.mp3']
+			})	
+		},
+		k:{
+			color: "#e89d6c",
+			sound: new Howl({
+  				src: ['sounds/pinwheel.mp3']
+			})	
+		},
+		l:{
+			color: "#85a4d8",
+			sound: new Howl({
+  				src: ['sounds/piston-1.mp3']
+			})	
+		},
+		m:{
+			color: "#8c6dbc",
+			sound: new Howl({
+  				src: ['sounds/piston-2.mp3']
+			})	
+		},
+		n:{
+			color: "#19460d",
+			sound: new Howl({
+  				src: ['sounds/piston-3.mp3']
+			})	
+		},
+		o:{
+			color: "#ff8d0a",
+			sound: new Howl({
+  				src: ['sounds/prism-1.mp3']
+			})	
+		},
+		p:{
+			color: "#d40323",
+			sound: new Howl({
+  				src: ['sounds/prism-2.mp3']
+			})	
+		},
+		q:{
+			color: "#f12ca3",
+			sound: new Howl({
+  				src: ['sounds/prism-3.mp3']
+			})	
+		},
+		r:{
+			color: "#5a8b59",
+			sound: new Howl({
+  				src: ['sounds/splits.mp3']
+			})	
+		},
+		s:{
+			color: "#18208e",
+			sound: new Howl({
+  				src: ['sounds/squiggle.mp3']
+			})	
+		},
+		t:{
+			color: "#561af8",
+			sound: new Howl({
+  				src: ['sounds/strike.mp3']
+			})	
+		},
+		u:{
+			color: "#273b65",
+			sound: new Howl({
+  				src: ['sounds/suspension.mp3']
+			})	
+		},
+		v:{
+			color: "#ba7ace",
+			sound: new Howl({
+  				src: ['sounds/timer.mp3']
+			})	
+		},
+		w:{
+			color: "#810db1",
+			sound: new Howl({
+  				src: ['sounds/ufo.mp3']
+			})	
+		},
+		x:{
+			color: "#a282e6",
+			sound: new Howl({
+  				src: ['sounds/veil.mp3']
+			})	
+		},
+		y:{
+			color: "#662229",
+			sound: new Howl({
+  				src: ['sounds/wipe.mp3']
+			})	
+		},
+		z:{
+			color: "#32b330",
+			sound: new Howl({
+  				src: ['sounds/zig-zag.mp3']
+			})	
+		},
+	}	
+
+	var circles = [];
+
+	function onKeyDown(event) {
+		if(keyData[event.key]){
+			var maxPoint = new Point(view.size.width, view.size.height);
+			var randomPoint = Point.random();
+			var point = maxPoint * randomPoint;
+			var newCircle = new Path.Circle(point, 500)
+			newCircle.fillColor = keyData[event.key].color
+			keyData[event.key].sound.play();
+
+			circles.push(newCircle);	
+		}		
+	}	
+
+	function onFrame(event){
+		for(var i = 0; i < circles.length; i++){
+			circles[i].fillColor.hue +=1;
+			circles[i].scale(.9);
+		}
+	}
+</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
+</html>
